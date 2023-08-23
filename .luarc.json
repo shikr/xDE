@@ -3,6 +3,8 @@
         "vim",
         "mousegrabber",
         "mouse",
-        "client"
+        "client",
+        "tag",
+        "awesome"
     ]
 }

@@ -17,11 +17,11 @@ local format_cmd = function (...)
 end
 
 local myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", format_cmd('man', 'awesome') },
-   { "edit config", format_cmd(apps.editor, awesome.conffile) },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+  { "manual", format_cmd('man', 'awesome') },
+  { "edit config", format_cmd(apps.editor, awesome.conffile) },
+  { "restart", awesome.restart },
+  { "quit", function() awesome.quit() end },
 }
 
 local mymainmenu = awful.menu {
@@ -115,7 +115,7 @@ end)
 
 -- TODO: move to keys.lua
 awful.mouse.append_global_mousebindings({
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewprev),
-    awful.button({ }, 5, awful.tag.viewnext),
+  awful.button({ }, 3, function () mymainmenu:toggle() end),
+  awful.button({ }, 4, awful.tag.viewprev),
+  awful.button({ }, 5, awful.tag.viewnext),
 })
