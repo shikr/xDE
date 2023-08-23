@@ -1,0 +1,3 @@
+[submodule "modules/nice"]
+	path = modules/nice
+	url = https://github.com/shikr/awesome-wm-nice.git
