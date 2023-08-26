@@ -1,3 +1,6 @@
 [submodule "modules/nice"]
 	path = modules/nice
 	url = https://github.com/shikr/awesome-wm-nice.git
+[submodule "modules/lua-color"]
+	path = modules/lua-color
+	url = https://github.com/shikr/lua-color.git
