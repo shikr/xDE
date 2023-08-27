@@ -18,6 +18,7 @@ theme.border_width = 0
 theme.border_radius = dpi(10)
 
 theme.menu_submenu_icon = gcolor.recolor_image(config_dir .. 'theme/assets/submenu.svg', theme.fg_normal)
+theme.awesome_icon = gcolor.recolor_image(config_dir .. 'theme/assets/awesome.svg', theme.fg_normal)
 
 theme.tooltip_border_width = dpi(1)
 theme.tooltip_shape = helpers.ui.rrect(dpi(4))
