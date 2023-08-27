@@ -2,6 +2,7 @@ local awful = require('awful')
 local hotkeys_popup = require("awful.hotkeys_popup")
 local apps = require('config.apps')
 local menubar = require("menubar")
+local main_menu = require("ui.menu")
 
 local modkey = "Mod4"
 
@@ -171,6 +172,12 @@ awful.keyboard.append_global_keybindings({
       end
     end,
   }
+})
+
+awful.mouse.append_global_mousebindings({
+  awful.button({ }, 3, function () main_menu:toggle() end),
+  awful.button({ }, 4, awful.tag.viewprev),
+  awful.button({ }, 5, awful.tag.viewnext),
 })
 
 client.connect_signal("request::default_mousebindings", function()

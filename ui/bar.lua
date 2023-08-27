@@ -86,10 +86,3 @@ screen.connect_signal('request::desktop_decoration', function (s)
     }
   }
 end)
-
--- TODO: move to keys.lua
-awful.mouse.append_global_mousebindings({
-  awful.button({ }, 3, function () main_menu:toggle() end),
-  awful.button({ }, 4, awful.tag.viewprev),
-  awful.button({ }, 5, awful.tag.viewnext),
-})
