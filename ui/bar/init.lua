@@ -28,10 +28,10 @@ screen.connect_signal('request::desktop_decoration', function (s)
       { -- Left widgets
         layout = wibox.layout.fixed.horizontal,
         mylauncher,
-        s.mytaglist,
+        s.mytasklist,
         s.mypromptbox,
       },
-      s.mytasklist, -- Middle widget
+      s.mytaglist, -- Middle widget
       { -- Right widgets
         layout = wibox.layout.fixed.horizontal,
         mykeyboardlayout,
