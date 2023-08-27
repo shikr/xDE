@@ -10,7 +10,7 @@ local widget_menu = wibox.widget {
   {
     image = beautiful.awesome_icon,
     resize = true,
-    clip_shape = helpers.rrect(6),
+    clip_shape = helpers.squircle(1.5),
     widget = wibox.widget.imagebox
   },
   margins = dpi(4),
