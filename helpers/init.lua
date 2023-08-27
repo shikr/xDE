@@ -1,5 +1,6 @@
 return {
   ui = require(... .. '.ui'),
   math = require(... .. '.math'),
-  color = require(... .. '.color')
+  color = require(... .. '.color'),
+  run = require(... .. '.run')
 }
