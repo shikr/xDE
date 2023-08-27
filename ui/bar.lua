@@ -1,30 +1,13 @@
 local awful = require('awful')
-local hotkeys_popup = require("awful.hotkeys_popup")
-local apps = require('config.apps')
 local beautiful = require("beautiful")
 local wibox = require('wibox')
-local format_cmd = require('helpers.run').format_cmd
+local main_menu = require('ui.menu')
 
 local modkey = 'Mod4'
 
-local myawesomemenu = {
-  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-  { "manual", format_cmd('man', 'awesome') },
-  { "edit config", format_cmd(apps.editor, awesome.conffile) },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end },
-}
-
-local mymainmenu = awful.menu {
-  items = {
-    { "awesome", myawesomemenu, beautiful.awesome_icon },
-    { "open terminal", apps.terminal },
-  },
-}
-
 local mylauncher = awful.widget.launcher {
   image = beautiful.awesome_icon,
-  menu = mymainmenu,
+  menu = main_menu,
 }
 
 local mykeyboardlayout = awful.widget.keyboardlayout()
@@ -106,7 +89,7 @@ end)
 
 -- TODO: move to keys.lua
 awful.mouse.append_global_mousebindings({
-  awful.button({ }, 3, function () mymainmenu:toggle() end),
+  awful.button({ }, 3, function () main_menu:toggle() end),
   awful.button({ }, 4, awful.tag.viewprev),
   awful.button({ }, 5, awful.tag.viewnext),
 })
