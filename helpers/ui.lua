@@ -8,6 +8,12 @@ function _ui.rrect(radius)
   end
 end
 
+function _ui.squircle(rate, delta)
+  return function (cr, width, heigth)
+    gears.shape.squircle(cr, width, heigth, rate, delta)
+  end
+end
+
 ---Update the cursor of a widget with hover.
 ---@param widget table
 ---@param cursor string hand2
