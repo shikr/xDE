@@ -2,6 +2,7 @@ local gfs = require('gears.filesystem')
 local helpers = require('helpers')
 local themes_dir = gfs.get_themes_dir()
 local theme = dofile(themes_dir .. 'default/theme.lua')
+local theme_assets = require('beautiful.theme_assets')
 local config_dir = gfs.get_configuration_dir()
 local gcolor = require('gears.color')
 local xresources = require("beautiful.xresources")
@@ -23,6 +24,8 @@ theme.awesome_icon = gcolor.recolor_image(config_dir .. 'theme/assets/awesome.sv
 theme.tooltip_border_width = dpi(1)
 theme.tooltip_shape = helpers.ui.rrect(dpi(4))
 -- theme.tooltip_opacity = 0.95 -- defined in picom
+
+theme.wibar_height = dpi(30)
 
 theme.icon_theme = nil
 
