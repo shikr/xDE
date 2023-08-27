@@ -3,18 +3,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local apps = require('config.apps')
 local beautiful = require("beautiful")
 local wibox = require('wibox')
-
-local format_cmd = function (...)
-  local str = ''
-  for i, value in ipairs({...}) do
-    if i == 1 then
-      str = value
-    else
-      str = str .. ' ' .. value
-    end
-  end
-  return apps.terminal .. ' "' .. str .. '"'
-end
+local format_cmd = require('helpers.run').format_cmd
 
 local myawesomemenu = {
   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
