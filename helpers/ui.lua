@@ -1,8 +1,8 @@
 local gears = require('gears')
 
-local helpers = {}
+local _ui = {}
 
-function helpers.rrect(radius)
+function _ui.rrect(radius)
   return function (cr, width, heigth)
     gears.shape.rounded_rect(cr, width, heigth, radius)
   end
@@ -11,7 +11,7 @@ end
 ---Update the cursor of a widget with hover.
 ---@param widget table
 ---@param cursor string hand2
-function helpers.add_hover_cursor(widget, cursor)
+function _ui.add_hover_cursor(widget, cursor)
   local old_cursor, old_widget
 
   widget:connect_signal('mouse::enter', function ()
@@ -30,4 +30,4 @@ function helpers.add_hover_cursor(widget, cursor)
   end)
 end
 
-return helpers
+return _ui

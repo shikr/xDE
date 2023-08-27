@@ -1,8 +1,8 @@
 local apps = require('config.apps')
 
-local helpers = {}
+local _run = {}
 
-function helpers.format_cmd(...)
+function _run.format_cmd(...)
   local str = ''
   for i, value in ipairs({...}) do
     if i == 1 then
@@ -14,4 +14,4 @@ function helpers.format_cmd(...)
   return apps.terminal .. ' "' .. str .. '"'
 end
 
-return helpers
+return _run
