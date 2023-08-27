@@ -5,6 +5,8 @@ local beautiful = require("beautiful")
 local wibox = require('wibox')
 local format_cmd = require('helpers.run').format_cmd
 
+local modkey = 'Mod4'
+
 local myawesomemenu = {
   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
   { "manual", format_cmd('man', 'awesome') },
