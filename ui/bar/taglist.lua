@@ -6,13 +6,12 @@ local xresources = beautiful.xresources
 local dpi = xresources.apply_dpi
 
 local modkey = 'Mod4'
--- TODO: Update colors
 local function update_tag(indicator, c3)
   if c3.selected then
     indicator.bg = beautiful.accent
     indicator.forced_width = dpi(24)
   elseif #c3:clients() == 0 then
-    indicator.bg = '#000000'
+    indicator.bg = beautiful.bg_item
     indicator.forced_width = dpi(8)
   else
     indicator.bg = beautiful.accent
@@ -69,7 +68,17 @@ return function (s)
   }
 
   return wibox.widget {
-    taglist,
+    {
+      {
+        taglist,
+        left = dpi(10),
+        right = dpi(10),
+        widget = wibox.container.margin
+      },
+      bg = beautiful.bg_color(beautiful.background_alt),
+      shape = gears.shape.rounded_bar,
+      widget = wibox.container.background
+    },
     halign = 'center',
     widget = wibox.container.place
   }
