@@ -9,7 +9,7 @@ local dpi = xresources.apply_dpi
 
 local mykeyboardlayout = awful.widget.keyboardlayout()
 
-local mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock('%I:%M %p')
 
 screen.connect_signal('request::desktop_decoration', function (s)
   awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
