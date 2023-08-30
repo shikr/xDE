@@ -13,7 +13,7 @@ local widget_menu = wibox.widget {
     clip_shape = helpers.squircle(1.5),
     widget = wibox.widget.imagebox
   },
-  margins = dpi(4),
+  margins = dpi(2),
   widget = wibox.container.margin,
 }
 

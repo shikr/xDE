@@ -4,6 +4,8 @@ local layoutbox = require(... .. '.layoutbox')
 local taglist = require(... .. '.taglist')
 local tasklist = require(... .. '.tasklist')
 local mylauncher = require(... .. '.start')
+local xresources = require('beautiful.xresources')
+local dpi = xresources.apply_dpi
 
 local mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -24,21 +26,25 @@ screen.connect_signal('request::desktop_decoration', function (s)
     position = "top",
     screen   = s,
     widget   = {
-      layout = wibox.layout.align.horizontal,
-      { -- Left widgets
-        layout = wibox.layout.fixed.horizontal,
-        mylauncher,
-        s.mytasklist,
-        s.mypromptbox,
+      {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+          layout = wibox.layout.fixed.horizontal,
+          mylauncher,
+          s.mytasklist,
+          s.mypromptbox,
+        },
+        s.mytaglist, -- Middle widget
+        { -- Right widgets
+          layout = wibox.layout.fixed.horizontal,
+          mykeyboardlayout,
+          wibox.widget.systray(),
+          mytextclock,
+          s.mylayoutbox,
+        },
       },
-      s.mytaglist, -- Middle widget
-      { -- Right widgets
-        layout = wibox.layout.fixed.horizontal,
-        mykeyboardlayout,
-        wibox.widget.systray(),
-        mytextclock,
-        s.mylayoutbox,
-      },
+      margins = dpi(2),
+      widget = wibox.container.margin
     }
   }
 end)
