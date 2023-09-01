@@ -25,6 +25,8 @@ theme.tooltip_border_width = dpi(1)
 theme.tooltip_shape = helpers.ui.rrect(dpi(4))
 -- theme.tooltip_opacity = 0.95 -- defined in picom
 
+theme.button_shape = helpers.ui.rrect(dpi(4))
+
 theme.wibar_height = dpi(30)
 
 theme.icon_theme = nil

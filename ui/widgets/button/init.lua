@@ -8,7 +8,7 @@ local function button(args)
   local widget = wibox.widget {
     widget = wibox.container.background,
     bg = args.bg,
-    shape = args.shape,
+    shape = args.shape ~= nil and args.shape or beautiful.button_shape,
     border_color = args.border_color,
     border_width = args.border_width,
     args.child
