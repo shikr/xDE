@@ -4,18 +4,22 @@ local gears = require('gears')
 local beautiful = require('beautiful')
 local xresources = beautiful.xresources
 local dpi = xresources.apply_dpi
+local rubato = require('modules.rubato')
 
 local modkey = 'Mod4'
-local function update_tag(indicator, c3)
+local function update_tag(indicator, c3, animation)
   if c3.selected then
     indicator.bg = beautiful.accent
-    indicator.forced_width = dpi(24)
+    animation:set(dpi(24))
+    -- indicator.forced_width = dpi(24)
   elseif #c3:clients() == 0 then
     indicator.bg = beautiful.bg_item
-    indicator.forced_width = dpi(8)
+    animation:set(dpi(8))
+    -- indicator.forced_width = dpi(8)
   else
     indicator.bg = beautiful.accent
-    indicator.forced_width = dpi(16)
+    animation:set(dpi(16))
+    -- indicator.forced_width = dpi(16)
   end
 end
 
@@ -41,12 +45,27 @@ return function (s)
           }
         }
 
+        self.animation = rubato.timed {
+          duration = 0.2,
+          pos = dpi(8),
+          awestore_compat = true,
+          clamp_position = true,
+          -- subscribed = function (pos)
+          -- require('naughty').notify {text = tostring(pos)}
+          --   indicator.forced_width = pos
+          -- end
+        }
+
+        self.animation:subscribe(function (pos)
+          indicator.children[1].forced_width = pos
+        end)
+
         self:set_widget(indicator)
 
-        update_tag(self.widget.children[1], c3)
+        update_tag(self.widget.children[1], c3, self.animation)
       end,
       update_callback = function (self, c3)
-        update_tag(self.widget.children[1], c3)
+        update_tag(self.widget.children[1], c3, self.animation)
       end
     },
     buttons = {
