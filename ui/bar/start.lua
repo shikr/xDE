@@ -8,16 +8,14 @@ local helpers = require('helpers.ui')
 local button = require("ui.widgets.button")
 
 local widget_menu = button {
-  child = {
-    margins = dpi(4),
-    widget = wibox.container.margin,
-    {
-      image = beautiful.awesome_icon,
-      resize = true,
-      clip_shape = helpers.squircle(1.5),
-      widget = wibox.widget.imagebox,
-    }
-  },
+  margins = dpi(4),
+  widget = wibox.container.margin,
+  {
+    image = beautiful.awesome_icon,
+    resize = true,
+    clip_shape = helpers.squircle(1.5),
+    widget = wibox.widget.imagebox,
+  }
 }
 
 widget_menu:buttons(

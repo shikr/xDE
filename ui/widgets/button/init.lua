@@ -3,16 +3,19 @@ local beautiful = require('beautiful')
 local rubato = require('modules.rubato')
 local Color = require('modules.lua-color')
 
-local function button(args)
+local function button(child, args)
+  args = args or {}
   local bg = args.bg ~= nil and args.bg or beautiful.bg_normal
+
   local widget = wibox.widget {
     widget = wibox.container.background,
-    bg = args.bg,
+    bg = bg,
     shape = args.shape ~= nil and args.shape or beautiful.button_shape,
     border_color = args.border_color,
     border_width = args.border_width,
-    args.child
+    child
   }
+
   local h, s, light, a = Color(bg):hsla()
   local _, _, hover_l = Color(beautiful.bg_hover(bg)):hsl()
 
