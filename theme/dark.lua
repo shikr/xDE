@@ -10,7 +10,7 @@ local function load_theme(theme)
   theme.bg_item = helpers.color.lighten(theme.background_alt2, 0.05)
 
   function theme.bg_hover(color)
-    return helpers.color.lighten(color, 0.05)
+    return helpers.color.lighten(color, 0.12)
   end
 
   function theme.bg_color(color)
