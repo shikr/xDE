@@ -4,3 +4,6 @@
 [submodule "modules/lua-color"]
 	path = modules/lua-color
 	url = https://github.com/shikr/lua-color.git
+[submodule "modules/rubato"]
+	path = modules/rubato
+	url = https://github.com/andOrlando/rubato.git
