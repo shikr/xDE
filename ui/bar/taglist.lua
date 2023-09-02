@@ -2,6 +2,7 @@ local awful = require('awful')
 local wibox = require('wibox')
 local gears = require('gears')
 local beautiful = require('beautiful')
+local helpers = require('helpers')
 local xresources = beautiful.xresources
 local dpi = xresources.apply_dpi
 local rubato = require('modules.rubato')
@@ -67,11 +68,15 @@ return function (s)
 
         indicator:connect_signal('mouse::enter', function ()
           self.animation:set(tag_sizes.selected)
+          if not c3.selected and #c3:clients() == 0 then
+            indicator.children[1].bg = helpers.color.lighten(beautiful.bg_item, 0.15)
+          end
         end)
 
         indicator:connect_signal('mouse::leave', function ()
-          local _, width = update_tag(c3)
+          local bg, width = update_tag(c3)
           self.animation:set(width)
+          indicator.children[1].bg = bg
         end)
 
         local bg, width = update_tag(c3)
