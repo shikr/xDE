@@ -59,6 +59,15 @@ return function (s)
 
         self:set_widget(indicator)
 
+        indicator:connect_signal('mouse::enter', function ()
+          self.animation:set(dpi(24))
+        end)
+
+        indicator:connect_signal('mouse::leave', function ()
+          local _, width = update_tag(c3)
+          self.animation:set(width)
+        end)
+
         local bg, width = update_tag(c3)
 
         indicator.children[1].bg = bg
