@@ -28,6 +28,7 @@ screen.connect_signal('request::desktop_decoration', function (s)
     widget   = {
       {
         layout = wibox.layout.align.horizontal,
+        expand = 'none',
         { -- Left widgets
           layout = wibox.layout.fixed.horizontal,
           mylauncher,
