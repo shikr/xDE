@@ -11,6 +11,8 @@ local mykeyboardlayout = awful.widget.keyboardlayout()
 
 local mytextclock = wibox.widget.textclock('%I:%M %p')
 
+local spacing = dpi(4)
+
 screen.connect_signal('request::desktop_decoration', function (s)
   awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
@@ -31,6 +33,7 @@ screen.connect_signal('request::desktop_decoration', function (s)
         expand = 'none',
         { -- Left widgets
           layout = wibox.layout.fixed.horizontal,
+          spacing = spacing,
           mylauncher,
           s.mytasklist,
           s.mypromptbox,
@@ -38,6 +41,7 @@ screen.connect_signal('request::desktop_decoration', function (s)
         s.mytaglist, -- Middle widget
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
+          spacing = spacing,
           mykeyboardlayout,
           wibox.widget.systray(),
           mytextclock,
