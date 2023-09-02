@@ -1,22 +1,19 @@
 local awful = require('awful')
 local wibox = require('wibox')
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local main_menu = require('ui.menu')
 local gtable = require('gears.table')
 local helpers = require('helpers.ui')
 local button = require("ui.widgets.button")
 
-local widget_menu = button.color {
-  margins = dpi(4),
-  widget = wibox.container.margin,
-  {
+local widget_menu = button.color(
+  button.size {
     image = beautiful.awesome_icon,
     resize = true,
     clip_shape = helpers.squircle(1.5),
     widget = wibox.widget.imagebox,
   }
-}
+)
 
 widget_menu:buttons(
   gtable.join(
