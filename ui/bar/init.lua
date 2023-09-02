@@ -48,7 +48,7 @@ screen.connect_signal('request::desktop_decoration', function (s)
           s.mylayoutbox,
         },
       },
-      margins = dpi(2),
+      margins = dpi(3),
       widget = wibox.container.margin
     }
   }
