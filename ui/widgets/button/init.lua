@@ -24,6 +24,7 @@ local function button(child, args)
     pos = light,
     awestore_compat = true,
     clamp_position = true,
+    easing = rubato.easing.quadratic
   }
 
   widget.animation:subscribe(function (l)
