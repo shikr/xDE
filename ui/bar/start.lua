@@ -7,7 +7,7 @@ local gtable = require('gears.table')
 local helpers = require('helpers.ui')
 local button = require("ui.widgets.button")
 
-local widget_menu = button {
+local widget_menu = button.color {
   margins = dpi(4),
   widget = wibox.container.margin,
   {
