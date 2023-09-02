@@ -8,17 +8,23 @@ local rubato = require('modules.rubato')
 
 local modkey = 'Mod4'
 
+local tag_sizes = {
+  selected = dpi(24),
+  empty = dpi(8),
+  busy = dpi(16),
+}
+
 local function update_tag(c3)
   local bg, width
   if c3.selected then
     bg = beautiful.accent
-    width = dpi(24)
+    width = tag_sizes.selected
   elseif #c3:clients() == 0 then
     bg = beautiful.bg_item
-    width = dpi(8)
+    width = tag_sizes.empty
   else
     bg = beautiful.accent
-    width = dpi(16)
+    width = tag_sizes.busy
   end
 
   return bg, width
@@ -41,14 +47,14 @@ return function (s)
           valign = "center",
           {
             widget = wibox.container.background,
-            forced_height = dpi(8),
+            forced_height = tag_sizes.empty,
             shape = gears.shape.rounded_bar,
           }
         }
 
         self.animation = rubato.timed {
           duration = 0.2,
-          pos = dpi(8),
+          pos = tag_sizes.empty,
           awestore_compat = true,
           clamp_position = true,
         }
@@ -60,7 +66,7 @@ return function (s)
         self:set_widget(indicator)
 
         indicator:connect_signal('mouse::enter', function ()
-          self.animation:set(dpi(24))
+          self.animation:set(tag_sizes.selected)
         end)
 
         indicator:connect_signal('mouse::leave', function ()
