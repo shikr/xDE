@@ -1,6 +1,5 @@
 {
     "diagnostics.globals": [
-        "vim",
         "mousegrabber",
         "mouse",
         "client",
