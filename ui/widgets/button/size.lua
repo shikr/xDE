@@ -2,11 +2,12 @@ local wibox = require('wibox')
 local beautiful = require('beautiful')
 local rubato = require('modules.rubato')
 local dpi = beautiful.xresources.apply_dpi
+local helpers = require('helpers.math')
 
 local function button(child, args)
   args = args or {}
-  local margins = args.margins ~= nil and args.margins or dpi(4)
-  local reduce = (args.reduce ~= nil and args.reduce or dpi(3)) + margins
+  local margins = args.margins ~= nil and args.margins or dpi(3)
+  local reduce = (args.reduce ~= nil and helpers.percent(args.reduce) or .7) * margins + margins
 
   local widget = wibox.widget {
     widget = wibox.container.margin,
