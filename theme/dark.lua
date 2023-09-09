@@ -8,6 +8,7 @@ local function load_theme(theme)
   theme.background_alt2 = helpers.color.lighten(theme.background_alt, 0.1)
 
   theme.bg_item = helpers.color.lighten(theme.background_alt2, 0.05)
+  theme.bg_invisible = '#00000000'
 
   function theme.bg_hover(color, amount)
     return helpers.color.lighten(color, amount ~= nil and amount or 0.12)

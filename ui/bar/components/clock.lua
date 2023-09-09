@@ -1,6 +1,6 @@
 local awful = require('awful')
 local wibox = require('wibox')
-local button = require('ui.widgets.button')
+local button = require('ui.bar.button')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 

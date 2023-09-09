@@ -1,5 +1,5 @@
 local awful = require('awful')
-local button = require('ui.widgets.button')
+local button = require('ui.bar.button')
 
 return function (s)
   return button(

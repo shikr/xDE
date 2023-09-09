@@ -1,5 +1,5 @@
 local awful = require("awful")
-local button = require('ui.widgets.button.color')
+local button = require('ui.bar.button')
 
 return function ()
   return button(awful.widget.keyboardlayout())
