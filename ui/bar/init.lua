@@ -4,12 +4,14 @@ local layoutbox = require(... .. '.layoutbox')
 local taglist = require(... .. '.taglist')
 local tasklist = require(... .. '.tasklist')
 local mylauncher = require(... .. '.start')
+local keyboard = require(... .. '.keyboard')
+local clock = require(... .. '.clock')
 local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 
-local mykeyboardlayout = awful.widget.keyboardlayout()
+local mykeyboardlayout = keyboard()
 
-local mytextclock = wibox.widget.textclock('%I:%M %p')
+local mytextclock = clock()
 
 local spacing = dpi(4)
 
