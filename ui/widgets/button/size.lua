@@ -16,7 +16,7 @@ local function button(child, args)
   }
 
   widget.animation = rubato.timed {
-    duration = 0.2,
+    duration = 0.1,
     intro = 0,
     pos = margins,
     awestore_compat = true,
