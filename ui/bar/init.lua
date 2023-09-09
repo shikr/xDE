@@ -1,11 +1,11 @@
 local awful = require('awful')
 local wibox = require('wibox')
-local layoutbox = require(... .. '.layoutbox')
-local taglist = require(... .. '.taglist')
-local tasklist = require(... .. '.tasklist')
-local mylauncher = require(... .. '.start')
-local keyboard = require(... .. '.keyboard')
-local clock = require(... .. '.clock')
+local layoutbox = require(... .. '.components.layoutbox')
+local taglist = require(... .. '.components.taglist')
+local tasklist = require(... .. '.components.tasklist')
+local mylauncher = require(... .. '.components.start')
+local keyboard = require(... .. '.components.keyboard')
+local clock = require(... .. '.components.clock')
 local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 
