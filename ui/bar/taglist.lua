@@ -66,16 +66,20 @@ return function (s)
         self:set_widget(indicator)
 
         indicator:connect_signal('mouse::enter', function ()
-          self.animation:set(tag_sizes.selected)
-          if not c3.selected and #c3:clients() == 0 then
-            indicator.children[1].bg = beautiful.bg_hover(beautiful.bg_item, 0.15)
+          if not c3.selected  then
+            self.animation:set(tag_sizes.selected)
+            if #c3:clients() == 0 then
+              indicator.children[1].bg = beautiful.bg_hover(beautiful.bg_item, 0.15)
+            end
           end
         end)
 
         indicator:connect_signal('mouse::leave', function ()
-          local bg, width = update_tag(c3)
-          self.animation:set(width)
-          indicator.children[1].bg = bg
+          if not c3.selected then
+            local bg, width = update_tag(c3)
+            self.animation:set(width)
+            indicator.children[1].bg = bg
+          end
         end)
 
         local bg, width = update_tag(c3)
