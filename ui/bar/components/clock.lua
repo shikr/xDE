@@ -6,7 +6,7 @@ local dpi = beautiful.xresources.apply_dpi
 
 return function ()
   local clock = button(wibox.widget.textclock('%I:%M %p'), {
-    margins = {
+    paddings = {
       left = dpi(3),
       right = dpi(3),
     },

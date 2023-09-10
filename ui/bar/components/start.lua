@@ -4,18 +4,17 @@ local beautiful = require("beautiful")
 local main_menu = require('ui.menu')
 local gtable = require('gears.table')
 local helpers = require('helpers.ui')
-local button = require('ui.widgets.button')
+local button = require('ui.bar.button')
 
-local widget_menu = button.color(
-  button.size {
+local widget_menu = button(
+  {
     image = beautiful.awesome_icon,
     resize = true,
     clip_shape = helpers.squircle(1.5),
     widget = wibox.widget.imagebox,
   },
   {
-    bg = beautiful.bg_invisible,
-    bg_hover = beautiful.bg_hover(beautiful.bg_normal)
+    animations = { 'color', 'size' }
   }
 )
 
