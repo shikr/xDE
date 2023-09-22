@@ -8,13 +8,14 @@ local button = require('ui.bar.button')
 
 local widget_menu = button(
   {
+    id = 'awesome_icon',
     image = beautiful.awesome_icon,
     resize = true,
     clip_shape = helpers.squircle(1.5),
     widget = wibox.widget.imagebox,
   },
   {
-    animations = { 'color', 'size' }
+    animations = { hover = 'color', click = 'size' }
   }
 )
 

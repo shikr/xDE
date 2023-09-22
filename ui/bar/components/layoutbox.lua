@@ -13,7 +13,7 @@ return function (s)
       }
     },
     {
-      animations = { 'color', 'size' }
+      animations = { hover = 'color', click = 'size' }
     }
   )
 end
