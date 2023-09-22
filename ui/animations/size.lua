@@ -19,23 +19,14 @@ local function size(widget, args)
     widget:get_children_by_id('padding')[1].margins = pos
   end)
 
-  widget:connect_signal('button::press', function (_, _, _, b)
-    widget.button = b
-    widget._size_animation:set(reduce)
-  end)
-
-  widget:connect_signal('button::release', function ()
-    widget.button = nil
-    widget._size_animation:set(widget._size_animation:initial())
-  end)
-
-  widget:connect_signal('mouse::leave', function (_, find_widgets_result)
-    if widget.button ~= nil then
-      widget:emit_signal('button::release', 1, 1, widget.button, {}, find_widgets_result)
-    end
-  end)
-
-  return widget
+  return {
+    start = function ()
+      widget._size_animation:set(reduce)
+    end,
+    finish = function ()
+      widget._size_animation:set(widget._size_animation:initial())
+    end,
+  }
 end
 
 return size

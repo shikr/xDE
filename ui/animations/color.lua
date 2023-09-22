@@ -22,18 +22,14 @@ local function new(widget, args)
     widget:get_children_by_id('background')[1].bg = new_color:mix(color_hover, pos):tostring()
   end)
 
-  -- get the widget below the margin
-  local w = widget:get_children_by_id('margin')[1].children[1]
-
-  w:connect_signal('mouse::enter', function ()
-    widget._color_animation:set(1)
-  end)
-
-  w:connect_signal('mouse::leave', function ()
-    widget._color_animation:set(widget._color_animation:initial())
-  end)
-
-  return widget
+  return {
+    start = function ()
+      widget._color_animation:set(1)
+    end,
+    finish = function ()
+      widget._color_animation:set(widget._color_animation:initial())
+    end,
+  }
 end
 
 return new
