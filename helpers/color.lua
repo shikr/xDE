@@ -24,6 +24,19 @@ function _color.darken(color, amount)
   })
 end
 
+function _color.is_dark(color)
+  local _, _, l = Color(color):hsla()
+  return l <= 0.2
+end
+
+function _color.darken_or_lighten(color, amount)
+  if _color.is_dark(color) then
+    return _color.lighten(color, amount)
+  else
+    return _color.darken(color, amount)
+  end
+end
+
 function _color.change_opacity(color, opacity)
   local r, g, b = Color(color):rgba()
 
