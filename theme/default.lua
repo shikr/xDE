@@ -17,6 +17,7 @@ theme.font = theme.font_name .. dpi(8)
 theme.border_width = 0
 theme.border_radius = dpi(10)
 
+theme.menu_shape = helpers.ui.rrect(dpi(6))
 theme.menu_submenu_icon = gcolor.recolor_image(config_dir .. 'theme/assets/submenu.svg', theme.fg_normal)
 theme.awesome_icon = gcolor.recolor_image(config_dir .. 'theme/assets/awesome.svg', theme.fg_normal)
 
