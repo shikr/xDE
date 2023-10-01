@@ -11,8 +11,10 @@ local colors = require('theme.dark')
 
 colors(theme)
 
+theme.font_size = dpi(8)
+
 theme.font_name = 'Sans '
-theme.font = theme.font_name .. dpi(8)
+theme.font = theme.font_name .. theme.font_size
 
 theme.border_width = 0
 theme.border_radius = dpi(10)
