@@ -1,5 +1,6 @@
 local function event(widget, events)
-  local w = widget:get_children_by_id('margin')[1].children[1]
+  local mwidget = widget:get_children_by_id('margin')[1]
+  local w = mwidget ~= nil and mwidget.children[1] or widget
 
   w:connect_signal('mouse::enter', function ()
     events:fire('start')
