@@ -12,6 +12,7 @@ local function new(widget, args)
 
   widget._color_animation = rubato.timed {
     duration = 0.2,
+    intro = 0,
     awestore_compat = true,
     clamp_position = true,
     easing = rubato.easing.quadratic
