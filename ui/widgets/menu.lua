@@ -55,19 +55,30 @@ local function place_child(widget, geo)
   end
 end
 
+local function get_childrens_by_id(children, id)
+  local widgets = {}
+  for _, child in ipairs(children) do
+    if tostring(child):match('^' .. id .. '.+') then
+      table.insert(widgets, child)
+    end
+  end
+  return widgets
+end
+
 function menu:show()
   if self.parent_menu ~= nil then
-    -- FIX: get all separators of parent_menu, currently returns an empty table
-    local separators = self.parent_menu.widget:get_children_by_id('separator')
     local children = self.parent_menu.widget.children
-    local sep = 1
+    -- PERF: update the method to get childrens
+    local separators = get_childrens_by_id(children, 'separator')
+    -- separators before the selected button
+    local sep = 0
+    -- the height of all separators
     local sep_h = 0
     local selected
     for i, button in ipairs(children) do
       -- obtain the position of separators and plus the height
-      require('naughty').notify {text = tostring(#separators)}
-      if sep <= #separators then
-        local w = separators[sep]
+      if sep + 1 <= #separators then
+        local w = separators[sep + 1]
         local wsep = w.children[1]
         local h = w.top + wsep.forced_height + w.bottom
         if children[i] == w then
@@ -81,7 +92,7 @@ function menu:show()
           button.submenu:hide()
         else
           selected = {
-            index = i,
+            index = i - sep,
             sep_height = sep_h
           }
         end
@@ -90,7 +101,7 @@ function menu:show()
     if selected ~= nil then
       local geo = self.parent_menu:geometry()
       local height = geo.height - sep_h
-      local wheight = height / (#self.parent_menu.widget.children - #separators)
+      local wheight = height / (#children - #separators)
       place_child(self, {
         x = geo.x,
         y = geo.y + wheight * (selected.index - 1) + selected.sep_height,
