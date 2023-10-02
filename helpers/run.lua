@@ -11,7 +11,7 @@ function _run.format_cmd(...)
       str = str .. ' ' .. value
     end
   end
-  return apps.terminal .. ' "' .. str .. '"'
+  return apps.terminal .. ' ' .. str
 end
 
 return _run
