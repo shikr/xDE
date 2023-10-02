@@ -251,12 +251,14 @@ function menu.button(args)
         1,
         nil,
         function ()
-          if type(args.callback) == 'string' then
-            awful.spawn(args.callback)
-          elseif type(args.callback) == 'function' then
-            args.callback()
+          if args.submenu == nil then
+            if type(args.callback) == 'string' then
+              awful.spawn(args.callback)
+            elseif type(args.callback) == 'function' then
+              args.callback()
+            end
+            widget.menu:hide(true)
           end
-          widget.menu:hide(true)
         end
       )
     )
