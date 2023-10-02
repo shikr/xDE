@@ -57,22 +57,46 @@ end
 
 function menu:show()
   if self.parent_menu ~= nil then
-    for i, button in ipairs(self.parent_menu.widget.children) do
+    -- FIX: get all separators of parent_menu, currently returns an empty table
+    local separators = self.parent_menu.widget:get_children_by_id('separator')
+    local children = self.parent_menu.widget.children
+    local sep = 1
+    local sep_h = 0
+    local selected
+    for i, button in ipairs(children) do
+      -- obtain the position of separators and plus the height
+      require('naughty').notify {text = tostring(#separators)}
+      if sep <= #separators then
+        local w = separators[sep]
+        local wsep = w.children[1]
+        local h = w.top + wsep.forced_height + w.bottom
+        if children[i] == w then
+          sep = sep + 1
+          sep_h = sep_h + h
+        end
+      end
+
       if button.submenu ~= nil  then
         if button.submenu ~= self then
           button.submenu:hide()
         else
-          local geo = self.parent_menu:geometry()
-          -- TODO: consider the size of separators to get the height of the childrens
-          local wheight = geo.height / #self.parent_menu.widget.children
-          place_child(self, {
-            x = geo.x,
-            y = geo.y + wheight * (i - 1),
-            width = geo.width,
-            height = wheight,
-          })
+          selected = {
+            index = i,
+            sep_height = sep_h
+          }
         end
       end
+    end
+    if selected ~= nil then
+      local geo = self.parent_menu:geometry()
+      local height = geo.height - sep_h
+      local wheight = height / (#self.parent_menu.widget.children - #separators)
+      place_child(self, {
+        x = geo.x,
+        y = geo.y + wheight * (selected.index - 1) + selected.sep_height,
+        width = geo.width,
+        height = wheight,
+      })
     end
   else
     local coords = mouse.coords()
@@ -121,7 +145,9 @@ function menu.menu(widgets)
     visible = false,
     ontop = true,
     shape = beautiful.menu_shape,
-    widget = wibox.layout.fixed.vertical,
+    widget = {
+      widget = wibox.layout.fixed.vertical,
+    },
   }
 
   rawset(widget, '_hide', widget.hide)
@@ -234,14 +260,12 @@ function menu.separator()
   return wibox.widget {
     {
       forced_height = dpi(2),
-      thickness = dpi(1),
-      orientation = 'horizontal',
-      color = beautiful.bg_item,
-      widget = wibox.widget.separator,
+      bg = beautiful.bg_item,
+      widget = wibox.container.background,
     },
     id = 'separator',
     margins = dpi(4),
-    widget = wibox.widget.margin,
+    widget = wibox.container.margin,
   }
 end
 
