@@ -258,6 +258,7 @@ function menu.button(args)
               args.callback()
             end
             widget.menu:hide(true)
+            widget.event_handlers.hover:fire('finish')
           end
         end
       )
