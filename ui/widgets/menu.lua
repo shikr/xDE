@@ -63,6 +63,7 @@ function menu:show()
           button.submenu:hide()
         else
           local geo = self.parent_menu:geometry()
+          -- TODO: consider the size of separators to get the height of the childrens
           local wheight = geo.height / #self.parent_menu.widget.children
           place_child(self, {
             x = geo.x,
@@ -227,6 +228,21 @@ function menu.button(args)
   widget.submenu = args.submenu
 
   return widget
+end
+
+function menu.separator()
+  return wibox.widget {
+    {
+      forced_height = dpi(2),
+      thickness = dpi(1),
+      orientation = 'horizontal',
+      color = beautiful.bg_item,
+      widget = wibox.widget.separator,
+    },
+    id = 'separator',
+    margins = dpi(4),
+    widget = wibox.widget.margin,
+  }
 end
 
 function mt.__call(_, ...)
