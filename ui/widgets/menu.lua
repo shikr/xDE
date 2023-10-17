@@ -258,7 +258,7 @@ function menu.button(args)
               args.callback()
             end
             widget.menu:hide(true)
-            widget.event_handlers.hover:fire('finish')
+            widget._color_animation:set(widget._color_animation:initial())
           end
         end
       )

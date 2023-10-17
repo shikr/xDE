@@ -14,7 +14,6 @@ local function subscribe(start, finish, handler)
 end
 
 function mt.__call(_, animation, widget, args)
-  widget.event_handlers = {}
   for name, func in pairs(events) do
     if animation[name] ~= nil then
       local start = subscribable()
@@ -43,7 +42,6 @@ function mt.__call(_, animation, widget, args)
         end
       end)
       func(widget, handler)
-      widget.event_handlers[name] = handler
     end
   end
 
