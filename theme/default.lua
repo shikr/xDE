@@ -31,6 +31,26 @@ theme.button_shape = helpers.ui.rrect(dpi(4))
 
 theme.wibar_height = dpi(34)
 
+theme.icons = {}
+
+theme.icons.network = {}
+
+local network_icons = {
+  'wifi-high',
+  'wifi-medium',
+  'wifi-low',
+  'wifi-none',
+  'wifi-failed',
+  'wifi-disabled',
+  'connecting',
+  'failed',
+  'connected',
+}
+
+for _, icon_name in ipairs(network_icons) do
+  theme.icons.network[icon_name] = config_dir .. 'theme/assets/network/' .. icon_name .. '.svg'
+end
+
 theme.icon_theme = nil
 
 return theme
