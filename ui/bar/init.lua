@@ -6,6 +6,7 @@ local tasklist = require(... .. '.components.tasklist')
 local mylauncher = require(... .. '.components.start')
 local keyboard = require(... .. '.components.keyboard')
 local clock = require(... .. '.components.clock')
+local control_center = require(... .. '.components.control-center')
 local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 
@@ -25,6 +26,8 @@ screen.connect_signal('request::desktop_decoration', function (s)
   s.mytaglist = taglist(s)
 
   s.mytasklist = tasklist(s)
+
+  s.control_center = control_center()
 
   s.mywibox = awful.wibar {
     position = "top",
@@ -47,6 +50,7 @@ screen.connect_signal('request::desktop_decoration', function (s)
           mykeyboardlayout,
           wibox.widget.systray(),
           mytextclock,
+          s.control_center,
           s.mylayoutbox,
         },
       },
