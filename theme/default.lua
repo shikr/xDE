@@ -29,7 +29,7 @@ theme.tooltip_shape = helpers.ui.rrect(dpi(4))
 
 theme.button_shape = helpers.ui.rrect(dpi(4))
 
-theme.wibar_height = dpi(34)
+theme.wibar_height = dpi(40)
 
 theme.icon_theme = nil
 
