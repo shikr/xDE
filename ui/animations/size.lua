@@ -2,29 +2,30 @@ local rubato = require('modules.rubato')
 local helpers = require('helpers.math')
 local dpi = require('beautiful.xresources').apply_dpi
 
-local function size(widget, args)
+local function size(updatefn, args)
   args = args or {}
-  local paddings = args.paddings ~= nil and args.paddings or dpi(3)
-  local reduce = (args.reduce ~= nil and helpers.percent(args.reduce) or 1) * paddings + paddings
+  local initial = args.initial ~= nil and args.initial or dpi(3)
 
-  widget._size_animation = rubato.timed {
-    duration = 0.1,
+  local animation = rubato.timed {
+    duration = args.duration or 0.1,
     intro = 0,
-    pos = paddings,
+    pos = initial,
     awestore_compat = true,
     clamp_position = true
   }
 
-  widget._size_animation:subscribe(function (pos)
-    widget:get_children_by_id('padding')[1].margins = pos
-  end)
+  animation:subscribe(updatefn)
 
   return {
-    start = function ()
-      widget._size_animation:set(reduce)
+    update = function (new_size)
+      animation:set(new_size)
     end,
-    finish = function ()
-      widget._size_animation:set(widget._size_animation:initial())
+    scale = function (scale)
+      local scaled_size = helpers.percent(scale) * initial + initial
+      animation:set(scaled_size)
+    end,
+    reset = function ()
+      animation:set(animation:initial())
     end,
   }
 end

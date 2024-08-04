@@ -2,33 +2,40 @@ local rubato = require('modules.rubato')
 local beautiful = require('beautiful')
 local Color = require('modules.lua-color')
 
-local function new(widget, args)
+local function new(updatefn, args)
   args = args or {}
-  local bg = args.bg ~= nil and args.bg or beautiful.bg_normal
-  local bg_hover = args.bg_hover ~= nil and args.bg_hover or beautiful.bg_hover(bg)
+  local from = args.from ~= nil and args.from or beautiful.bg_normal
+  local to = args.to ~= nil and args.to or beautiful.bg_hover(from)
 
-  local color = Color(bg)
-  local color_hover = Color(bg_hover)
+  local color = Color(from)
+  local tcolor = Color(to)
 
-  widget._color_animation = rubato.timed {
-    duration = 0.2,
+  local animation = rubato.timed {
+    duration = args.duration or 0.2,
     awestore_compat = true,
     clamp_position = true,
-    easing = rubato.easing.quadratic
+    easing = rubato.easing.quadratic,
   }
 
-  widget._color_animation:subscribe(function (pos)
+  animation:subscribe(function (pos)
     local new_color = Color(color)
-    widget:get_children_by_id('background')[1].bg = new_color:mix(color_hover, pos):tostring()
+    updatefn(new_color:mix(tcolor, pos):tostring())
   end)
 
   return {
-    start = function ()
-      widget._color_animation:set(1)
+    on = function ()
+      animation:set(1)
     end,
-    finish = function ()
-      widget._color_animation:set(widget._color_animation:initial())
+    off = function ()
+      animation:set(0)
     end,
+    toggle = function ()
+      if animation:last() == 0 then
+        animation:set(1)
+      else
+        animation:set(0)
+      end
+    end
   }
 end
 
