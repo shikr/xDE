@@ -1,11 +1,11 @@
 local awful = require('awful')
 local wibox = require('wibox')
-local button = require('ui.bar.button')
+local label = require('ui.bar.label')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 
 return function ()
-  local clock = button(wibox.widget.textclock('%I:%M %p'), {
+  local clock = label(wibox.widget.textclock('%I:%M %p'), {
     paddings = {
       left = dpi(3),
       right = dpi(3),

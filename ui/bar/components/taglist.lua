@@ -5,6 +5,7 @@ local beautiful = require('beautiful')
 local xresources = beautiful.xresources
 local dpi = xresources.apply_dpi
 local rubato = require('modules.rubato')
+local animate = require('ui.animations').animations.size
 
 local modkey = 'Mod4'
 
@@ -52,22 +53,21 @@ return function (s)
           }
         }
 
-        self.animation = rubato.timed {
-          duration = 0.2,
-          pos = tag_sizes.empty,
-          awestore_compat = true,
-          clamp_position = true,
-        }
-
-        self.animation:subscribe(function (pos)
-          indicator.children[1].forced_width = pos
-        end)
+        self.animation = animate(
+          function (width)
+            indicator.children[1].forced_width = width
+          end,
+          {
+            duration = 0.2,
+            initial = tag_sizes.empty
+          }
+        )
 
         self:set_widget(indicator)
 
         indicator:connect_signal('mouse::enter', function ()
           if not c3.selected  then
-            self.animation:set(tag_sizes.selected)
+            self.animation.update(tag_sizes.selected)
             if #c3:clients() == 0 then
               indicator.children[1].bg = beautiful.bg_hover(beautiful.bg_item, 0.15)
             end
@@ -77,7 +77,7 @@ return function (s)
         indicator:connect_signal('mouse::leave', function ()
           if not c3.selected then
             local bg, width = update_tag(c3)
-            self.animation:set(width)
+            self.animation.update(width)
             indicator.children[1].bg = bg
           end
         end)
@@ -85,12 +85,12 @@ return function (s)
         local bg, width = update_tag(c3)
 
         indicator.children[1].bg = bg
-        self.animation:set(width)
+        self.animation.update(width)
       end,
       update_callback = function (self, c3)
         local bg, width = update_tag(c3)
         self.widget.children[1].bg = bg
-        self.animation:set(width)
+        self.animation.update(width)
       end
     },
     buttons = {

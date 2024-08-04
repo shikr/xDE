@@ -4,7 +4,7 @@ local gtable = require('gears.table')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 local popup = require('ui.widgets.popup')
-local animate = require('ui.animations')
+local animate = require('ui.animations').animate
 local container = require('ui.widgets.container')
 
 local menu = {}
@@ -173,21 +173,6 @@ function menu.menu(widgets)
   return widget
 end
 
-local function onhover(args)
-  return function (widget)
-    return {
-      start = function ()
-        if args.submenu ~= nil then
-          args.submenu:show()
-        else
-          widget.menu:hide_children()
-        end
-      end,
-      finish = function () end
-    }
-  end
-end
-
 function menu.button(args)
   local fill_widget = wibox.widget {
     bg = beautiful.bg_invisible,
@@ -239,10 +224,31 @@ function menu.button(args)
       shape = beautiful.menu_shape,
     }
   )
-  animate({ hover = { 'color', onhover(args) } }, widget, {
-    bg = beautiful.bg_invisible,
-    bg_hover = beautiful.bg_hover(beautiful.bg_normal),
-  })
+  local color_animation = animate(
+    widget,
+    'hover',
+    'color',
+    function (color)
+      widget:get_children_by_id('background')[1].bg = color
+    end,
+    {
+      from = beautiful.bg_invisible,
+      to = beautiful.bg_hover(beautiful.bg_normal)
+    }
+  )
+
+  widget.hover.on:subscribe(function ()
+    color_animation.on()
+    if args.submenu ~= nil then
+      args.submenu:show()
+    else
+      widget.menu:hide_children()
+    end
+  end)
+
+  widget.hover.off:subscribe(function ()
+    color_animation.off()
+  end)
 
   widget:buttons(
     gtable.join(

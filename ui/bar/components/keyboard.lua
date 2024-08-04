@@ -1,6 +1,6 @@
 local awful = require("awful")
-local button = require('ui.bar.button')
+local label = require('ui.bar.label')
 
 return function ()
-  return button(awful.widget.keyboardlayout())
+  return label(awful.widget.keyboardlayout())
 end
