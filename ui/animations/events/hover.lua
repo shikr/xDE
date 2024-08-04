@@ -1,13 +1,17 @@
-local function event(widget, events)
-  local mwidget = widget:get_children_by_id('margin')[1]
-  local w = mwidget ~= nil and mwidget.children[1] or widget
+local subscribable = require('helpers.table').subscribable
 
-  w:connect_signal('mouse::enter', function ()
-    events:fire('start')
+local function event(widget)
+  widget.hover = {
+    on = subscribable(),
+    off = subscribable()
+  }
+
+  widget:connect_signal('mouse::enter', function ()
+    widget.hover.on:fire()
   end)
 
-  w:connect_signal('mouse::leave', function ()
-    events:fire('finish')
+  widget:connect_signal('mouse::leave', function ()
+    widget.hover.off:fire()
   end)
 
   return widget
